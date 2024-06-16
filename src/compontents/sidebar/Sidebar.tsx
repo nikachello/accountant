@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import storeDatabase from "../../data/MockData";
+import { RxDashboard } from "react-icons/rx";
+import { CiDollar, CiSquareQuestion } from "react-icons/ci";
+import { LiaChartBarSolid } from "react-icons/lia";
+import { IoIosLogOut } from "react-icons/io";
 
 function Sidebar() {
   const [userData, setUserData] = useState({
@@ -29,41 +33,91 @@ function Sidebar() {
   });
 
   return (
-    <div className="h-screen w-1/4 md:w-1/6 bg-stone-100">
+    <div className="h-screen w-1/4 md:w-1/6 bg-[#FFFFFF]">
       <div className="px-4 py-4 flex flex-col justify-between h-full">
         {/* Name */}
         <div className="mb-4">
           <div className="bg-white p-4 rounded-lg">
-            <p className="text-lg font-bold">{userData.name}</p>
-            <p className="text-sm">{userData.instagram}</p>
+            <p className="text-lg font-bold">{userData.instagram}</p>
           </div>
         </div>
 
         {/* Menu */}
-        <div className="mb-4">
+        <div className="flex-1 -m-4 mt-3">
           <div>
             <div className="flex flex-col space-y-10 font-BPG-Glaho">
-              <a className="inline-block text-green-600 cursor-pointer">
-                მთავარი
-              </a>
-              <a className="inline-block hover:text-green-600 cursor-pointer">
-                შემოსავალი
-              </a>
-              <a className="inline-block hover:text-green-600 cursor-pointer">
-                მოთხოვნები
-              </a>
-              <a className="inline-block hover:text-green-600 cursor-pointer">
-                სტატისტიკა
-              </a>
+              <div>
+                <a
+                  href="#"
+                  className="flex flex-row gap-2 items-center px-4 py-2 bg-gradient-to-r from-[#ACA9FF] from-0% bg-opacity-40 to-transparent to-[10px] text-textActive cursor-pointer"
+                >
+                  <RxDashboard
+                    size={24}
+                    className="fill-current text-[#ACA9FF]"
+                  />
+                  <span className="mt-1">მთავარი</span>
+                </a>
+              </div>
+
+              <div>
+                <a
+                  href="#"
+                  className="flex flex-row gap-2 items-center px-4 py-2 text-textGray cursor-pointer hover:text-textActive"
+                >
+                  <CiDollar size={24} className="fill-current text-textGray" />
+                  <span className="mt-1">შემოსავალი</span>
+                </a>
+              </div>
+
+              <div>
+                <a
+                  href="#"
+                  className="flex flex-row gap-2 items-center px-4 py-2 text-textGray cursor-pointer hover:text-textActive"
+                >
+                  <CiSquareQuestion
+                    size={24}
+                    className="fill-current text-textGray"
+                  />
+                  <span className="mt-1">მოთხოვნები</span>
+                </a>
+              </div>
+
+              <div>
+                <a
+                  href="#"
+                  className="flex flex-row gap-2 items-center px-4 py-2 text-textGray cursor-pointer hover:text-textActive"
+                >
+                  <LiaChartBarSolid
+                    size={24}
+                    className="fill-current text-textGray"
+                  />
+                  <span className="mt-1">სტატისტიკა</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Profile */}
-        <div>
-          <div>
-            <p className="text-lg font-bold font-BPG-Glaho">პროფილი</p>
-            {/* Add profile information here */}
+        <div className="font-BPG-Glaho">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
+              <div className="w-[45px] h-[45px]">
+                <img
+                  src="https://randomuser.me/api/portraits/men/2.jpg"
+                  alt="Profile picture"
+                  className="rounded-full"
+                />
+              </div>
+              <div>
+                <span className="font-bold text-sm">
+                  {userData.name.split(" ")[0]}
+                </span>
+              </div>
+            </div>
+            <div className="cursor-pointer">
+              <IoIosLogOut />
+            </div>
           </div>
         </div>
       </div>

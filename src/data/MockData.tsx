@@ -1,5 +1,5 @@
 const storeDatabase = {
-  userId: 1,
+  userID: 1,
   comission: 10,
   products: [
     { id: 1, name: "Neverfull", brand: "Louis Vuitton", price: 1500 },
@@ -12,7 +12,7 @@ const storeDatabase = {
     // Add more clients as needed
   ],
   sellers: [
-    { id: 1, name: "Nikolozi Tchelidze", comission: 10 },
+    { id: 1, name: "ნიკოლოზი ჭელიძე", comission: 10 },
     { id: 2, name: "Avto", comission: 10 },
     { id: 3, name: "Gio", comission: 10 },
     // Add more sellers as needed

@@ -1,4 +1,9 @@
-function InfoCard({ title, details }) {
+interface InfoCardProps {
+  title: string;
+  details: Record<string, string>;
+}
+
+const InfoCard: React.FC<InfoCardProps> = ({ title, details }) => {
   return (
     <div className="p-5 m-5 text-center bg-slate-200">
       <div className="pb-5">
@@ -13,6 +18,6 @@ function InfoCard({ title, details }) {
       </div>
     </div>
   );
-}
+};
 
 export default InfoCard;

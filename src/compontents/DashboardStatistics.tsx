@@ -1,5 +1,6 @@
 import InfoCard from "./InfoCard";
 import { useEffect, useState } from "react";
+import { calculateProfitDetails } from "../utils/dataUtils";
 import storeDatabase from "../data/MockData";
 
 function DashboardStatistics() {
@@ -25,50 +26,20 @@ function DashboardStatistics() {
   // };
 
   const [profitDetails, setProfitDetails] = useState({});
-  const [salesDetails, setSalesDetails] = useState({});
-  const [salesHistoryDetails, setSalesHistoryDetails] = useState({});
-  const [clientsDetails, setClientsDetails] = useState({});
+  // const [salesDetails, setSalesDetails] = useState({});
+  // const [salesHistoryDetails, setSalesHistoryDetails] = useState({});
+  // const [clientsDetails, setClientsDetails] = useState({});
 
   useEffect(() => {
-    const calculateProfitDetails = () => {
-      const filteredOrders = storeDatabase.orders.filter(
-        (order) => order.sellerId === storeDatabase.userId
-      );
+    const sellerProfitData = calculateProfitDetails(storeDatabase.userID);
 
-      const totalSales = filteredOrders.reduce(
-        (total, order) => total + order.total,
-        0
-      );
-
-      // const filteredExpenses = storeDatabase.expenses.filter((expense) =>
-      //   expense.sellerId === storeDatabase.userId;
-      // );
-
-      const filteredExpenses = storeDatabase.expenses.filter(
-        (expense) => expense.sellerId === storeDatabase.userId
-      );
-
-      const totalExpenses = filteredExpenses.reduce(
-        (total, expense) => total + expense.amount,
-        0
-      );
-
-      const totalProfitFromSeller = totalSales - totalExpenses;
-
-      const totalComissionSeller =
-        totalProfitFromSeller * storeDatabase.comission;
-
-      // const totalComissionSeller = totalSalesSeller *
-    };
-  });
+    setProfitDetails(sellerProfitData);
+  }, []);
 
   return (
     <div className="px-4 py-4 font-BPG-Glaho w-full">
       <div className="grid md:grid-cols-2 gap-4">
-        <InfoCard
-          title="გამომუშავებული თანხა"
-          details={calculateProfitDetails()}
-        />
+        <InfoCard title="გამომუშავებული თანხა" details={profitDetails} />
         {/* <InfoCard title="ბოლო გაყიდვები" details={salesDetails} />
         <InfoCard title="გაყიდვების ისტორია" details={salesHistoryDetails} />
         <InfoCard title="მომხმარებლების ინფორმაცია" details={clientsDetails} /> */}

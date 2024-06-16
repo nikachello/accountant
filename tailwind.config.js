@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         "BPG-Glaho": ["BPG Glaho", "sans-serif"],
       },
+      colors: { textGray: "#818194", textActive: "#605BFF" },
     },
   },
   plugins: [],
