@@ -1,0 +1,5 @@
+@import url("//cdn.web-fonts.ge/fonts/bpg-glaho/css/bpg-glaho.min.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
