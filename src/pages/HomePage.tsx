@@ -1,4 +1,4 @@
-import DashboardStatistics from "../compontents/DashboardStatistics";
+import DashboardStatistics from "../compontents/DashboardStatisticsTop";
 import Sidebar from "../compontents/sidebar/Sidebar";
 
 function Home() {

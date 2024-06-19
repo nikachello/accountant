@@ -38,7 +38,9 @@ function Sidebar() {
         {/* Name */}
         <div className="mb-4">
           <div className="bg-white p-4 rounded-lg">
-            <p className="text-lg font-bold">{userData.instagram}</p>
+            <p className="text-lg font-Nunito font-bold">
+              {userData.instagram}
+            </p>
           </div>
         </div>
 
