@@ -7,7 +7,7 @@ export default {
         "BPG-Glaho": ["BPG Glaho", "sans-serif"],
         Nunito: ["Nunito", "sans-serif"],
       },
-      colors: { textGray: "#818194", textActive: "#605BFF" },
+      colors: { textGray: "#818194", textActive: "#605BFF", pageBG: "#FAFAFB" },
     },
   },
   plugins: [],

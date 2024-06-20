@@ -30,7 +30,7 @@ const storeDatabase = {
       sellerId: 1,
       instagramId: 2,
       total: 1700,
-      date: new Date("2024-05-24"), // Example date format: YYYY-MM-DD
+      date: new Date("2024-06-15"), // Example date format: YYYY-MM-DD
     },
     {
       id: 2,
@@ -38,8 +38,8 @@ const storeDatabase = {
       productId: 2,
       sellerId: 1,
       instagramId: 3,
-      total: 2000,
-      date: new Date("2024-06-15"),
+      total: 100,
+      date: new Date("2024-06-17"),
     },
     {
       id: 1,
@@ -48,7 +48,7 @@ const storeDatabase = {
       sellerId: 1,
       instagramId: 2,
       total: 1700,
-      date: new Date("2023-12-15"),
+      date: new Date("2024-06-13"),
     },
     {
       id: 1,
@@ -57,7 +57,16 @@ const storeDatabase = {
       sellerId: 1,
       instagramId: 2,
       total: 1700,
-      date: new Date("2022-12-15"),
+      date: new Date("2024-06-12"),
+    },
+    {
+      id: 1,
+      clientId: 1,
+      productId: 1,
+      sellerId: 1,
+      instagramId: 2,
+      total: 100,
+      date: new Date("2024-06-10"),
     },
     {
       id: 2,
@@ -66,7 +75,7 @@ const storeDatabase = {
       sellerId: 2,
       instagramId: 2,
       total: 1500,
-      date: new Date("2025-01-15"),
+      date: new Date("2024-06-15"),
     },
     // Add more transactions as needed
   ],
