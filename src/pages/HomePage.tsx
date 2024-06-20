@@ -3,6 +3,7 @@ import Sidebar from "../components/sidebar/Sidebar";
 import DatePickerCustom from "../components/DatePicker";
 import { useEffect, useState } from "react";
 import OrdersChart from "../components/OrdersChart";
+import IncomeDoughtnut from "../components/IncomeDoughtnut";
 
 function Home() {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -45,8 +46,13 @@ function Home() {
           endDate={endDate}
           onChange={onChange}
         />
-        <div className="w-2/3 bg-white ml-4 p-3 rounded-lg">
-          <OrdersChart startDate={startDate} endDate={endDate} />
+        <div className="flex gap-7 p-5">
+          <div className="w-2/3 bg-white rounded-lg">
+            <OrdersChart startDate={startDate} endDate={endDate} />
+          </div>
+          <div className="w-1/3 bg-white rounded-lg">
+            <IncomeDoughtnut startDate={startDate} endDate={endDate} />
+          </div>
         </div>
       </div>
     </div>
