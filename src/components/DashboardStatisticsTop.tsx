@@ -18,7 +18,7 @@ const DashboardStatistics: React.FC<DashboardStatisticsProps> = ({
   endDate,
 }) => {
   return (
-    <div className="p-4 w-full">
+    <div className="w-full">
       <div className="flex flex-wrap justify-between gap-4">
         {/* გაყიდვები */}
         <div className="flex gap-4 items-center bg-white py-5 px-6 rounded-lg flex-1 min-w-[200px] max-w-[300px]">

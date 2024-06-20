@@ -4,6 +4,7 @@ const storeDatabase = {
   products: [
     { id: 1, name: "Neverfull", brand: "Louis Vuitton", price: 1500 },
     { id: 2, name: "Lady", brand: "Dior", price: 1800 },
+    { id: 3, name: "Arque", brand: "Prada", price: 2000 },
     // Add more products as needed
   ],
   clients: [
@@ -26,7 +27,7 @@ const storeDatabase = {
     {
       id: 1,
       clientId: 1,
-      productId: 1,
+      productId: [1, 2, 3],
       sellerId: 1,
       instagramId: 2,
       total: 1700,

@@ -4,6 +4,7 @@ import DatePickerCustom from "../components/DatePicker";
 import { useEffect, useState } from "react";
 import OrdersChart from "../components/OrdersChart";
 import IncomeDoughtnut from "../components/IncomeDoughtnut";
+import RecentOrders from "../components/recentOrders";
 
 function Home() {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -38,20 +39,27 @@ function Home() {
       <Sidebar />
       <div className="w-full">
         <div className="p-5">
-          <h1 className="text-lg">ზოგადი ინფორმაცია</h1>
+          <h1 className="text-lg font-BPG-Glaho">ზოგადი ინფორმაცია</h1>
         </div>
-        <DashboardStatistics startDate={startDate} endDate={endDate} />
+        <div className="p-5">
+          <DashboardStatistics startDate={startDate} endDate={endDate} />
+        </div>
         <DatePickerCustom
           startDate={startDate}
           endDate={endDate}
           onChange={onChange}
         />
         <div className="flex gap-7 p-5">
-          <div className="w-2/3 bg-white rounded-lg">
+          <div className="w-2/3 bg-white rounded-lg p-5">
             <OrdersChart startDate={startDate} endDate={endDate} />
           </div>
-          <div className="w-1/3 bg-white rounded-lg">
+          <div className="w-1/3 bg-white rounded-lg p-5">
             <IncomeDoughtnut startDate={startDate} endDate={endDate} />
+          </div>
+        </div>
+        <div className="flex gap-7 p-5">
+          <div className="w-2/3 bg-white rounded-lg p-5">
+            <RecentOrders />
           </div>
         </div>
       </div>

@@ -70,3 +70,41 @@ export const sellerExpensesUSD = (
 
   return sellerExpensesUSD;
 };
+
+export const getRecentOrders = (userID: number, amountToShow: number) => {
+  const filteredOrders = sellerOrders(userID);
+
+  filteredOrders.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+  const recentOrders = filteredOrders.slice(0, amountToShow);
+
+  const ordersWithDetails = recentOrders.map((order) => {
+    const client = storeDatabase.clients.find(
+      (client) => client.id === order.clientId
+    );
+
+    const productIds = Array.isArray(order.productId)
+      ? order.productId
+      : [order.productId];
+
+    const products = productIds.map((productId) =>
+      storeDatabase.products.find((product) => product.id === productId)
+    );
+
+    if (client && products) {
+      return {
+        orderID: order.id,
+        clientName: client.name,
+        products: products.map((product) => ({
+          productName: product?.name,
+          productPrice: product?.price,
+        })),
+        orderTotal: order.total,
+      };
+    } else {
+      return "Some error have occured";
+    }
+  });
+
+  return ordersWithDetails;
+};

@@ -33,7 +33,7 @@ function Sidebar() {
   });
 
   return (
-    <div className="h-screen w-1/4 md:w-1/6 bg-white">
+    <div className="sticky top-0 h-screen w-1/4 md:w-1/6 bg-white">
       <div className="px-4 py-4 flex flex-col justify-between h-full">
         {/* Name */}
         <div className="mb-4">
