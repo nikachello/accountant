@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import OrdersChart from "../components/OrdersChart";
 import IncomeDoughtnut from "../components/IncomeDoughtnut";
 import RecentOrders from "../components/recentOrders";
+import TopSellingProducts from "../components/TopSellingProducts";
 
 function Home() {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -49,17 +50,24 @@ function Home() {
           endDate={endDate}
           onChange={onChange}
         />
-        <div className="flex gap-7 p-5">
-          <div className="w-2/3 bg-white rounded-lg p-5">
+        <div className="sm:flex gap-7 p-5">
+          <div className="w-2/3 sm:w-2/3 mb-5 sm:mb-0 bg-white rounded-lg p-5">
             <OrdersChart startDate={startDate} endDate={endDate} />
           </div>
-          <div className="w-1/3 bg-white rounded-lg p-5">
+          <div className="w-2/3 sm:w-1/3 bg-white rounded-lg p-5">
             <IncomeDoughtnut startDate={startDate} endDate={endDate} />
           </div>
         </div>
-        <div className="flex gap-7 p-5">
-          <div className="w-2/3 bg-white rounded-lg p-5">
-            <RecentOrders />
+        <div className="sm:flex gap-7 p-5">
+          <div className="sm:w-2/3 bg-white rounded-lg p-5">
+            <RecentOrders startDate={startDate} endDate={endDate} />
+          </div>
+          <div className="sm:w-1/3 bg-white rounded-lg p-5">
+            <TopSellingProducts
+              amountToShow={10}
+              startDate={startDate}
+              endDate={endDate}
+            />
           </div>
         </div>
       </div>

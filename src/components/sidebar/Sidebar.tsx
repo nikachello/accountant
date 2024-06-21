@@ -38,7 +38,7 @@ function Sidebar() {
         {/* Name */}
         <div className="mb-4">
           <div className="bg-white p-4 rounded-lg">
-            <p className="text-lg font-Nunito font-bold">
+            <p className="text-lg hidden md:block font-Nunito font-bold">
               {userData.instagram}
             </p>
           </div>
@@ -57,7 +57,7 @@ function Sidebar() {
                     size={24}
                     className="fill-current text-[#ACA9FF]"
                   />
-                  <span className="mt-1">მთავარი</span>
+                  <span className="mt-1 hidden sm:block">მთავარი</span>
                 </a>
               </div>
 
@@ -67,7 +67,7 @@ function Sidebar() {
                   className="flex flex-row gap-2 items-center px-4 py-2 text-textGray cursor-pointer hover:text-textActive"
                 >
                   <CiDollar size={24} className="fill-current text-textGray" />
-                  <span className="mt-1">შემოსავალი</span>
+                  <span className="mt-1 hidden sm:block">შემოსავალი</span>
                 </a>
               </div>
 
@@ -80,7 +80,7 @@ function Sidebar() {
                     size={24}
                     className="fill-current text-textGray"
                   />
-                  <span className="mt-1">მოთხოვნები</span>
+                  <span className="mt-1 hidden sm:block">მოთხოვნები</span>
                 </a>
               </div>
 
@@ -93,7 +93,7 @@ function Sidebar() {
                     size={24}
                     className="fill-current text-textGray"
                   />
-                  <span className="mt-1">სტატისტიკა</span>
+                  <span className="mt-1 hidden sm:block">სტატისტიკა</span>
                 </a>
               </div>
             </div>
@@ -104,7 +104,7 @@ function Sidebar() {
         <div className="font-BPG-Glaho">
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
-              <div className="w-[45px] h-[45px]">
+              <div className="w-[45px] h-[45px] hidden sm:block">
                 <img
                   src="https://randomuser.me/api/portraits/men/2.jpg"
                   alt="Profile picture"
@@ -112,7 +112,7 @@ function Sidebar() {
                 />
               </div>
               <div>
-                <span className="font-bold text-sm">
+                <span className="font-bold text-sm hidden sm:block">
                   {userData.name.split(" ")[0]}
                 </span>
               </div>

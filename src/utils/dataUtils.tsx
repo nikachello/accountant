@@ -2,8 +2,8 @@ import storeDatabase from "../data/MockData";
 
 export const sellerOrders = (
   userID: number,
-  startDate?: Date,
-  endDate?: Date
+  startDate?: Date | null,
+  endDate?: Date | null
 ) => {
   let filteredOrders = storeDatabase.orders.filter(
     (order) => order.sellerId === userID
@@ -71,8 +71,13 @@ export const sellerExpensesUSD = (
   return sellerExpensesUSD;
 };
 
-export const getRecentOrders = (userID: number, amountToShow: number) => {
-  const filteredOrders = sellerOrders(userID);
+export const getRecentOrders = (
+  userID: number,
+  amountToShow: number,
+  startDate: Date | null,
+  endDate: Date | null
+) => {
+  const filteredOrders = sellerOrders(userID, startDate, endDate);
 
   filteredOrders.sort((a, b) => b.date.getTime() - a.date.getTime());
 
@@ -98,6 +103,7 @@ export const getRecentOrders = (userID: number, amountToShow: number) => {
         products: products.map((product) => ({
           productName: product?.name,
           productPrice: product?.price,
+          productBrand: product?.brand,
         })),
         orderTotal: order.total,
       };
@@ -107,4 +113,46 @@ export const getRecentOrders = (userID: number, amountToShow: number) => {
   });
 
   return ordersWithDetails;
+};
+
+export const calculateTopSellingProducts = (
+  amountToShow: number,
+  startDate: Date | null,
+  endDate: Date | null
+) => {
+  let soldProductQuantity: number[] = [];
+
+  const filteredOrders = sellerOrders(storeDatabase.userID, startDate, endDate);
+
+  const recentOrders = filteredOrders.slice(0, amountToShow);
+
+  recentOrders.map(
+    (order) =>
+      (soldProductQuantity = soldProductQuantity.concat(order.productId))
+  );
+
+  const productCountMap = soldProductQuantity.reduce((acc, product) => {
+    if (acc[product]) {
+      acc[product]++;
+    } else {
+      acc[product] = 1;
+    }
+    return acc;
+  }, {});
+
+  const productCounts = Object.entries(productCountMap).map(
+    ([productId, count]) => ({
+      productId: parseInt(productId), // Convert productId back to number
+      count,
+    })
+  );
+
+  productCounts.sort((a, b) => b.count - a.count);
+
+  const sortedProducts = productCounts.map((item) => item);
+  return sortedProducts;
+};
+
+export const getProductWithId = (productId: number) => {
+  return storeDatabase.products.find((product) => product.id === productId);
 };

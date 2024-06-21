@@ -2,9 +2,27 @@ const storeDatabase = {
   userID: 1,
   comission: 10,
   products: [
-    { id: 1, name: "Neverfull", brand: "Louis Vuitton", price: 1500 },
-    { id: 2, name: "Lady", brand: "Dior", price: 1800 },
-    { id: 3, name: "Arque", brand: "Prada", price: 2000 },
+    {
+      id: 1,
+      name: "Neverfull",
+      brand: "Louis Vuitton",
+      price: 1500,
+      img: "https://eu.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-neverfull-mm-monogram-canvas-handbags--M46987_PM2_Front%20view.png?wid=1090&hei=1090",
+    },
+    {
+      id: 2,
+      name: "Lady",
+      brand: "Dior",
+      price: 1800,
+      img: "https://api.platforme.com/api/compose?brand=dior&model=my_lady_dior_cuir&version=686&p=base:cuir:noir_em900&initials=&size=720",
+    },
+    {
+      id: 3,
+      name: "Arque",
+      brand: "Prada",
+      price: 2000,
+      img: "https://www.prada.com/content/dam/pradabkg_products/1/1BC/1BC194/ASKF0XUG/1BC194_ASK_F0XUG_V_OOO_SLF.jpg/_jcr_content/renditions/cq5dam.web.hebebed.1000.1000.jpg",
+    },
     // Add more products as needed
   ],
   clients: [
@@ -52,7 +70,7 @@ const storeDatabase = {
       date: new Date("2024-06-13"),
     },
     {
-      id: 1,
+      id: 3,
       clientId: 1,
       productId: 1,
       sellerId: 1,
@@ -61,7 +79,7 @@ const storeDatabase = {
       date: new Date("2024-06-12"),
     },
     {
-      id: 1,
+      id: 4,
       clientId: 1,
       productId: 1,
       sellerId: 1,
@@ -70,7 +88,7 @@ const storeDatabase = {
       date: new Date("2024-06-10"),
     },
     {
-      id: 2,
+      id: 5,
       clientId: 2,
       productId: 2,
       sellerId: 2,

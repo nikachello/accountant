@@ -19,7 +19,7 @@ const DashboardStatistics: React.FC<DashboardStatisticsProps> = ({
 }) => {
   return (
     <div className="w-full">
-      <div className="flex flex-wrap justify-between gap-4">
+      <div className="sm:flex flex-wrap justify-between gap-4">
         {/* გაყიდვები */}
         <div className="flex gap-4 items-center bg-white py-5 px-6 rounded-lg flex-1 min-w-[200px] max-w-[300px]">
           <div className="relative">

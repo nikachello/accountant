@@ -66,6 +66,7 @@ const IncomeDoughnut = ({
 
   return (
     <div>
+      <h1 className="font-BPG-Glaho text-lg mb-5">საკომისიო/ხარვეზები</h1>
       {hasData ? (
         <Doughnut data={finalData} options={options} />
       ) : (
