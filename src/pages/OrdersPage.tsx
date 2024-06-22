@@ -41,10 +41,10 @@ function Orders() {
   return (
     <div className="flex flex-row bg-pageBG min-h-screen">
       <Sidebar activeTab="შეკვეთები" />
-      <div className="w-3/6 bg-pageBG ">
+      <div className="w-9/12 md:w-8/12 bg-pageBG ">
         <AllOrders clickHandler={clickHandler} />
       </div>
-      <div className="w-2/6 bg-white ">
+      <div className="hidden md:block md:w-6/12 bg-white ">
         <OrderDetails orderDetails={orderDetails} />
       </div>
     </div>

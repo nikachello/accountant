@@ -9,11 +9,11 @@ const AllOrders: React.FC<AllOrdersProps> = ({ clickHandler }) => {
   const allOrders = getRecentOrders(storeDatabase.userID, null, null, null);
   return (
     <div className="p-8">
-      <div className="flex w-full justify-between">
+      <div className="sm:flex text-center w-full justify-between">
         <div>
           <h1 className="text-lg font-BPG-Glaho">შეკვეთები</h1>
         </div>
-        <div className="bg-primaryButton text-white p-3 rounded-md cursor-pointer hover:bg-primaryButtonHover">
+        <div className="bg-primaryButton text-white text-sm mt-2 sm:mt-0 p-3 rounded-md cursor-pointer hover:bg-primaryButtonHover">
           + დაამატე შეკვეთა
         </div>
       </div>
@@ -24,14 +24,23 @@ const AllOrders: React.FC<AllOrdersProps> = ({ clickHandler }) => {
           const customer = getCustomerInfo(order.clientId);
           return (
             <div
-              className="flex justify-between bg-white p-5 rounded-md cursor-pointer mb-3 font-Nunito"
+              className="text-sm flex justify-between bg-white p-5 rounded-md cursor-pointer mb-3 font-Nunito"
               onClick={() => clickHandler({ order: order })}
             >
               <div>{order.orderID}</div>
               <div>{customer?.name}</div>
-              <div>{customer?.email}</div>
-              <div>{customer?.phoneNum}</div>
-              <div>Louis Vuitton - Neverfull</div>
+              <div className="hidden lg:block">{customer?.email}</div>
+              <div className="hidden lg:block">{customer?.phoneNum}</div>
+              {order.products.length > 1 ? (
+                <div className="hidden lg:block">
+                  {order.products[0].productName} + {order.products.length - 1}
+                </div>
+              ) : (
+                <div className="hidden lg:block">
+                  {order.products[0].productName}
+                </div>
+              )}
+
               <div>${order.orderTotal}</div>
               <div className="">
                 <span className="p-2 bg-green-200 rounded-md">გადახდილია</span>

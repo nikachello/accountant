@@ -26,12 +26,12 @@ const OrderDetails = ({ orderDetails }) => {
   return (
     <div className="p-4 font-BPG-Glaho">
       <div className="flex flex-row justify-between">
-        <div>
+        <div className="md:flex md:flex-col lg:block">
           <span>შეკვეთა: {orderDetails?.orderInfo?.order.orderID}</span>
-          <span className="ml-5 bg-orange-400 p-2 rounded-md text-white">
+          <span className="mb-2 mt-2 lg:mt-0 lg:mb-0 lg:ml-5 bg-orange-400 p-2 rounded-md text-white">
             მზადდება გასაგზავნად
           </span>
-          <span className="ml-5 bg-green-700 p-2 rounded-md text-white">
+          <span className="lg:ml-5 bg-green-700 p-2 rounded-md text-white">
             თანხა გადახდილია
           </span>
         </div>
@@ -83,26 +83,19 @@ const OrderDetails = ({ orderDetails }) => {
       </div>
       <div className="mt-1 p-4">
         {orderDetails.orderInfo?.order.products[0].name}
-        <div className="flex justify-between border border-textGray  p-4 rounded-md cursor-pointer mb-3 font-Nunito">
-          <div>1</div>
-          <div>Louis Vuitton - Neverfull</div>
-          <div>850$</div>
-          <div>750$</div>
-        </div>
 
-        <div className="flex justify-between border border-textGray  p-4 rounded-md cursor-pointer mb-3 font-Nunito">
-          <div>1</div>
-          <div>Louis Vuitton - Neverfull</div>
-          <div>850$</div>
-          <div>750$</div>
-        </div>
-
-        <div className="flex justify-between border border-textGray  p-4 rounded-md cursor-pointer mb-3 font-Nunito">
-          <div>1</div>
-          <div>Louis Vuitton - Neverfull</div>
-          <div>850$</div>
-          <div>750$</div>
-        </div>
+        {orderDetails.orderInfo?.order.products.map((product: any) => (
+          <div>
+            {" "}
+            <div className="flex justify-between border border-textGray  p-4 rounded-md cursor-pointer mb-3 font-Nunito">
+              <div>1</div>
+              <div>
+                {product.productBrand} - {product.productName}
+              </div>
+              <div>{product.productPrice}$</div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

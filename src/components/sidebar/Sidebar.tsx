@@ -68,12 +68,12 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
   });
 
   return (
-    <div className="sticky top-0 h-screen w-1/4 md:w-1/6 bg-white">
+    <div className="sticky top-0 h-screen w-1/12 lg:w-1/6 bg-white">
       <div className="px-4 py-4 flex flex-col justify-between h-full">
         {/* Name */}
         <div className="mb-4">
           <div className="bg-white p-4 rounded-lg">
-            <p className="text-lg hidden md:block font-Nunito font-bold">
+            <p className="text-lg hidden lg:block font-Nunito font-bold">
               {userData.instagram}
             </p>
           </div>
@@ -99,7 +99,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
                         size={24}
                         className="fill-current text-textGray"
                       />
-                      <span className="mt-1 hidden sm:block">{item.label}</span>
+                      <span className="mt-1 hidden lg:block">{item.label}</span>
                     </a>
                   </div>
                 );
@@ -112,7 +112,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
         <div className="font-BPG-Glaho">
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
-              <div className="w-[45px] h-[45px] hidden sm:block">
+              <div className="w-[45px] h-[45px] hidden lg:block">
                 <img
                   src="https://randomuser.me/api/portraits/men/2.jpg"
                   alt="Profile picture"
@@ -120,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
                 />
               </div>
               <div>
-                <span className="font-bold text-sm hidden sm:block">
+                <span className="font-bold text-sm hidden lg:block">
                   {userData.name.split(" ")[0]}
                 </span>
               </div>
