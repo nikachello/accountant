@@ -37,9 +37,9 @@ const RecentOrders: React.FC<RecentOrdersProps> = ({ startDate, endDate }) => {
                     } + ${order.products.length - 1}`}
                 </td>
                 <td className="p-5">
-                  {order.products.length > 0 && order.products[0].productPrice}
+                  ${order.products.length > 0 && order.products[0].productPrice}
                 </td>
-                <td className="p-5">{order.orderTotal}</td>
+                <td className="p-5">${order.orderTotal}</td>
               </tr>
             ) : (
               <tr

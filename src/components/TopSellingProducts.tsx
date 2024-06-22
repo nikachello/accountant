@@ -42,7 +42,7 @@ const TopSellingProducts: React.FC<TopSellingProductsProps> = ({
                   </span>
                 </div>
                 <div>
-                  <span>{getProductWithId(product.productId)?.price}</span>
+                  <span>${getProductWithId(product.productId)?.price}</span>
                 </div>
               </div>
             </div>

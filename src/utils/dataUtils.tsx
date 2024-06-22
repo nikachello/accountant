@@ -73,15 +73,21 @@ export const sellerExpensesUSD = (
 
 export const getRecentOrders = (
   userID: number,
-  amountToShow: number,
+  amountToShow: number | null,
   startDate: Date | null,
   endDate: Date | null
 ) => {
+  let recentOrders = [];
+
   const filteredOrders = sellerOrders(userID, startDate, endDate);
 
   filteredOrders.sort((a, b) => b.date.getTime() - a.date.getTime());
 
-  const recentOrders = filteredOrders.slice(0, amountToShow);
+  if (amountToShow) {
+    recentOrders = filteredOrders.slice(0, amountToShow);
+  }
+
+  recentOrders = filteredOrders;
 
   const ordersWithDetails = recentOrders.map((order) => {
     const client = storeDatabase.clients.find(
@@ -99,13 +105,22 @@ export const getRecentOrders = (
     if (client && products) {
       return {
         orderID: order.id,
+        clientId: client.id,
         clientName: client.name,
+        clientEmail: client.email,
+        clientPhoneNum: client.phoneNum,
         products: products.map((product) => ({
           productName: product?.name,
           productPrice: product?.price,
           productBrand: product?.brand,
         })),
         orderTotal: order.total,
+        isOrderShipped: order.isShipped,
+        isOrderPaid: order.isMoneyReceived,
+        orderDate: order.date,
+        cargoPrice: order.totalCargo,
+        orderWeight: order.weight,
+        orderPayment: order.paymentType,
       };
     } else {
       return "Some error have occured";
@@ -155,4 +170,12 @@ export const calculateTopSellingProducts = (
 
 export const getProductWithId = (productId: number) => {
   return storeDatabase.products.find((product) => product.id === productId);
+};
+
+export const getAllOrders = (userID: number) => {
+  return storeDatabase.orders.filter((order) => order.sellerId === userID);
+};
+
+export const getCustomerInfo = (customerID: number) => {
+  return storeDatabase.clients.find((client) => client.id === customerID);
 };

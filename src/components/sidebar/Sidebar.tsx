@@ -4,12 +4,47 @@ import { RxDashboard } from "react-icons/rx";
 import { CiDollar, CiSquareQuestion } from "react-icons/ci";
 import { LiaChartBarSolid } from "react-icons/lia";
 import { IoIosLogOut } from "react-icons/io";
+import { MdReceiptLong } from "react-icons/md";
 
-function Sidebar() {
+interface SidebarProps {
+  activeTab: string;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
+  const menuItems = [
+    {
+      label: "მთავარი",
+      icon: RxDashboard,
+      href: "/",
+    },
+    // {
+    //   label: "შემოსავალი",
+    //   icon: CiDollar,
+    //   href: "#",
+    // },
+    {
+      label: "შეკვეთები",
+      icon: MdReceiptLong,
+      href: "/orders",
+    },
+    {
+      label: "მოთხოვნები",
+      icon: CiSquareQuestion,
+      href: "#",
+    },
+    {
+      label: "სტატისტიკა",
+      icon: LiaChartBarSolid,
+      href: "#",
+    },
+  ];
+
   const [userData, setUserData] = useState({
     name: "",
     instagram: "",
   });
+
+  const [activeMenuItem, setActiveMenuItem] = useState(activeTab);
 
   useEffect(() => {
     const fetchUserData = () => {
@@ -48,54 +83,27 @@ function Sidebar() {
         <div className="flex-1 -m-4 mt-3">
           <div>
             <div className="flex flex-col space-y-10 font-BPG-Glaho">
-              <div>
-                <a
-                  href="#"
-                  className="flex flex-row gap-2 items-center px-4 py-2 bg-gradient-to-r from-[#ACA9FF] from-0% bg-opacity-40 to-transparent to-[10px] text-textActive cursor-pointer"
-                >
-                  <RxDashboard
-                    size={24}
-                    className="fill-current text-[#ACA9FF]"
-                  />
-                  <span className="mt-1 hidden sm:block">მთავარი</span>
-                </a>
-              </div>
-
-              <div>
-                <a
-                  href="#"
-                  className="flex flex-row gap-2 items-center px-4 py-2 text-textGray cursor-pointer hover:text-textActive"
-                >
-                  <CiDollar size={24} className="fill-current text-textGray" />
-                  <span className="mt-1 hidden sm:block">შემოსავალი</span>
-                </a>
-              </div>
-
-              <div>
-                <a
-                  href="#"
-                  className="flex flex-row gap-2 items-center px-4 py-2 text-textGray cursor-pointer hover:text-textActive"
-                >
-                  <CiSquareQuestion
-                    size={24}
-                    className="fill-current text-textGray"
-                  />
-                  <span className="mt-1 hidden sm:block">მოთხოვნები</span>
-                </a>
-              </div>
-
-              <div>
-                <a
-                  href="#"
-                  className="flex flex-row gap-2 items-center px-4 py-2 text-textGray cursor-pointer hover:text-textActive"
-                >
-                  <LiaChartBarSolid
-                    size={24}
-                    className="fill-current text-textGray"
-                  />
-                  <span className="mt-1 hidden sm:block">სტატისტიკა</span>
-                </a>
-              </div>
+              {menuItems.map((item, key) => {
+                const IconComponent = item.icon;
+                return (
+                  <div key={key} onClick={() => setActiveMenuItem(item.label)}>
+                    <a
+                      href={item.href}
+                      className={`flex flex-row gap-2 items-center px-4 py-2  ${
+                        item.label === activeMenuItem
+                          ? "bg-gradient-to-r from-[#ACA9FF] from-0% bg-opacity-40 to-transparent to-[10px] text-textActive"
+                          : "text-textGray cursor-pointer hover:text-textActive"
+                      }`}
+                    >
+                      <IconComponent
+                        size={24}
+                        className="fill-current text-textGray"
+                      />
+                      <span className="mt-1 hidden sm:block">{item.label}</span>
+                    </a>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -125,6 +133,6 @@ function Sidebar() {
       </div>
     </div>
   );
-}
+};
 
 export default Sidebar;

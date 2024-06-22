@@ -37,7 +37,7 @@ function Home() {
 
   return (
     <div className="flex flex-row bg-pageBG min-h-screen relative">
-      <Sidebar />
+      <Sidebar activeTab="მთავარი" />
       <div className="w-full">
         <div className="p-5">
           <h1 className="text-lg font-BPG-Glaho">ზოგადი ინფორმაცია</h1>
@@ -54,7 +54,7 @@ function Home() {
           <div className="w-2/3 sm:w-2/3 mb-5 sm:mb-0 bg-white rounded-lg p-5">
             <OrdersChart startDate={startDate} endDate={endDate} />
           </div>
-          <div className="w-2/3 sm:w-1/3 bg-white rounded-lg p-5">
+          <div className="w-1/3 sm:w-1/3 bg-white rounded-lg p-5">
             <IncomeDoughtnut startDate={startDate} endDate={endDate} />
           </div>
         </div>
