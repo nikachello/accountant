@@ -182,3 +182,9 @@ export const getAllOrders = (userID: number) => {
 export const getCustomerInfo = (customerID: number) => {
   return storeDatabase.clients.find((client) => client.id === customerID);
 };
+
+export const getOrderExpense = (userID: number, orderID: number) => {
+  return storeDatabase.expenses.find(
+    (expense) => expense.sellerId === userID && expense.orderId === orderID
+  );
+};

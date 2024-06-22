@@ -1,5 +1,7 @@
 import { LuPencil } from "react-icons/lu";
 import { IoCalendarClearOutline } from "react-icons/io5";
+import storeDatabase from "../data/MockData";
+import { getOrderExpense } from "../utils/dataUtils";
 
 interface OrderDetails {
   orderID: number;
@@ -23,6 +25,11 @@ interface OrderDetails {
 
 // @ts-ignore
 const OrderDetails = ({ orderDetails }) => {
+  const expense = getOrderExpense(
+    storeDatabase.userID,
+    orderDetails.orderInfo?.order.orderID
+  );
+
   return (
     <div className="p-4 font-BPG-Glaho">
       <div className="flex flex-row justify-between">
@@ -83,7 +90,6 @@ const OrderDetails = ({ orderDetails }) => {
       </div>
       <div className="mt-1 p-4">
         {orderDetails.orderInfo?.order.products[0].name}
-
         {orderDetails.orderInfo?.order.products.map((product: any) => (
           <div>
             {" "}
@@ -96,6 +102,28 @@ const OrderDetails = ({ orderDetails }) => {
             </div>
           </div>
         ))}
+
+        <div className="flex justify-between border border-textGray  p-4 rounded-md cursor-pointer mb-3 font-Nunito">
+          <div>
+            სულ საკომისიო: $
+            {(orderDetails.orderInfo?.order.orderTotal *
+              storeDatabase.comission) /
+              100}
+            {expense && (
+              <div>
+                ხარვეზი: ${expense.amount}
+                <div>კომენტარი: {expense.reason}</div>
+                <div>
+                  ჯამში ასაღები თანხა: $
+                  {(orderDetails.orderInfo?.order.orderTotal *
+                    storeDatabase.comission) /
+                    100 -
+                    expense.amount}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
