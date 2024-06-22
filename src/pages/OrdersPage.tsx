@@ -2,14 +2,39 @@ import { useState } from "react";
 import AllOrders from "../components/AllOrders";
 import OrderDetails from "../components/OrderDetails";
 import Sidebar from "../components/sidebar/Sidebar";
-import { getCustomerInfo } from "../utils/dataUtils";
+
+interface Order {
+  orderID: number;
+  clientId: number;
+  clientName: string;
+  clientEmail: string;
+  clientPhoneNum: string;
+  products: {
+    productName: string | undefined;
+    productPrice: number | undefined;
+    productBrand: string | undefined;
+  }[];
+  orderTotal: number;
+  isOrderShipped: boolean;
+  isOrderPaid: boolean;
+  orderDate: Date;
+  cargoPrice: number;
+  orderWeight: number;
+  orderPayment: string;
+}
+
+interface OrderDetailsState {
+  orderInfo: Order | null;
+}
 
 function Orders() {
-  const [orderDetails, setOrderDetails] = useState(1);
+  const [orderDetails, setOrderDetails] = useState<OrderDetailsState>({
+    orderInfo: null,
+  });
 
-  function clickHandler(orderInfo) {
+  function clickHandler(order: Order) {
     setOrderDetails({
-      orderInfo: orderInfo,
+      orderInfo: order,
     });
   }
 

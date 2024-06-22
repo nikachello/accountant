@@ -1,7 +1,11 @@
 import storeDatabase from "../data/MockData";
 import { getCustomerInfo, getRecentOrders } from "../utils/dataUtils";
 
-const AllOrders = ({ clickHandler }) => {
+interface AllOrdersProps {
+  clickHandler: (order: any) => void;
+}
+
+const AllOrders: React.FC<AllOrdersProps> = ({ clickHandler }) => {
   const allOrders = getRecentOrders(storeDatabase.userID, null, null, null);
   return (
     <div className="p-8">
@@ -16,11 +20,12 @@ const AllOrders = ({ clickHandler }) => {
       {/* Order list */}
       <div className="mt-10">
         {allOrders?.map((order) => {
+          if (!order) return null;
           const customer = getCustomerInfo(order.clientId);
           return (
             <div
               className="flex justify-between bg-white p-5 rounded-md cursor-pointer mb-3 font-Nunito"
-              onClick={() => clickHandler({ order: order, customer: customer })}
+              onClick={() => clickHandler({ order: order })}
             >
               <div>{order.orderID}</div>
               <div>{customer?.name}</div>

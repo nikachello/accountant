@@ -35,6 +35,9 @@ function Home() {
     }
   };
 
+  const start = startDate || undefined;
+  const end = endDate || undefined;
+
   return (
     <div className="flex flex-row bg-pageBG min-h-screen relative">
       <Sidebar activeTab="მთავარი" />
@@ -45,11 +48,7 @@ function Home() {
         <div className="p-5">
           <DashboardStatistics startDate={startDate} endDate={endDate} />
         </div>
-        <DatePickerCustom
-          startDate={startDate}
-          endDate={endDate}
-          onChange={onChange}
-        />
+        <DatePickerCustom startDate={start} endDate={end} onChange={onChange} />
         <div className="sm:flex gap-7 p-5">
           <div className="w-2/3 sm:w-2/3 mb-5 sm:mb-0 bg-white rounded-lg p-5">
             <OrdersChart startDate={startDate} endDate={endDate} />

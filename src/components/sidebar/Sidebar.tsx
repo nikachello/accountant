@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import storeDatabase from "../../data/MockData";
 import { RxDashboard } from "react-icons/rx";
-import { CiDollar, CiSquareQuestion } from "react-icons/ci";
+import { CiSquareQuestion } from "react-icons/ci";
 import { LiaChartBarSolid } from "react-icons/lia";
 import { IoIosLogOut } from "react-icons/io";
 import { MdReceiptLong } from "react-icons/md";

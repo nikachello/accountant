@@ -1,7 +1,27 @@
 import { LuPencil } from "react-icons/lu";
 import { IoCalendarClearOutline } from "react-icons/io5";
-import { getRecentOrders } from "../utils/dataUtils";
 
+interface OrderDetails {
+  orderID: number;
+  clientId: number;
+  clientName: string;
+  clientEmail: string;
+  clientPhoneNum: string;
+  products: {
+    productName: string | undefined;
+    productPrice: number | undefined;
+    productBrand: string | undefined;
+  }[];
+  orderTotal: number;
+  isOrderShipped: boolean;
+  isOrderPaid: boolean;
+  orderDate: Date;
+  cargoPrice: number;
+  orderWeight: number;
+  orderPayment: string;
+}
+
+// @ts-ignore
 const OrderDetails = ({ orderDetails }) => {
   return (
     <div className="p-4 font-BPG-Glaho">

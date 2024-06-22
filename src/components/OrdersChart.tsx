@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { ChartData, ChartOptions } from "chart.js";
@@ -15,7 +15,7 @@ const OrdersChart = ({
   const [chartData, setChartData] = useState<ChartData<"line"> | null>(null);
 
   useEffect(() => {
-    let filteredOrders = [];
+    let filteredOrders: any[] = [];
     if (startDate && endDate) {
       filteredOrders = sellerOrders(storeDatabase.userID, startDate, endDate);
     }

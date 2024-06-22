@@ -123,11 +123,11 @@ export const getRecentOrders = (
         orderPayment: order.paymentType,
       };
     } else {
-      return "Some error have occured";
+      return null;
     }
   });
 
-  return ordersWithDetails;
+  return ordersWithDetails.filter((order) => order !== null);
 };
 
 export const calculateTopSellingProducts = (
@@ -146,14 +146,17 @@ export const calculateTopSellingProducts = (
       (soldProductQuantity = soldProductQuantity.concat(order.productId))
   );
 
-  const productCountMap = soldProductQuantity.reduce((acc, product) => {
-    if (acc[product]) {
-      acc[product]++;
-    } else {
-      acc[product] = 1;
-    }
-    return acc;
-  }, {});
+  const productCountMap = soldProductQuantity.reduce<Record<number, number>>(
+    (acc, product) => {
+      if (acc[product]) {
+        acc[product]++;
+      } else {
+        acc[product] = 1;
+      }
+      return acc;
+    },
+    {}
+  );
 
   const productCounts = Object.entries(productCountMap).map(
     ([productId, count]) => ({
