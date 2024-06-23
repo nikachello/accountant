@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import storeDatabase from "../data/MockData";
 import { getRecentOrders } from "../utils/dataUtils";
 
@@ -26,24 +27,30 @@ const RecentOrders: React.FC<RecentOrdersProps> = ({ startDate, endDate }) => {
                 className="text-center font-Nunito hover:bg-pageBG cursor-pointer"
                 key={order?.orderID}
               >
-                <td className="p-5">{order?.orderID}</td>
-                <td className="p-5">{order?.clientName}</td>
-                <td className="p-5">
-                  {order?.products.length == 1 &&
-                    `${order.products[0].productName} - ${order.products[0].productBrand}`}
-                  {order &&
-                    order.products.length > 1 &&
-                    `${order?.products[0].productName} - ${
-                      order?.products[0].productBrand
-                    } + ${order.products.length - 1}`}
-                </td>
-                <td className="p-5">
-                  $
-                  {order &&
-                    order.products.length > 0 &&
-                    order.products[0].productPrice}
-                </td>
-                <td className="p-5">${order?.orderTotal}</td>
+                <Link
+                  className="flex flex-row w-full h-full"
+                  to="/orders"
+                  state={{ orderInfo: { order: order } }}
+                >
+                  <td className="p-5">{order?.orderID}</td>
+                  <td className="p-5">{order?.clientName}</td>
+                  <td className="p-5">
+                    {order?.products.length == 1 &&
+                      `${order.products[0].productName} - ${order.products[0].productBrand}`}
+                    {order &&
+                      order.products.length > 1 &&
+                      `${order?.products[0].productName} - ${
+                        order?.products[0].productBrand
+                      } + ${order.products.length - 1}`}
+                  </td>
+                  <td className="p-5">
+                    $
+                    {order &&
+                      order.products.length > 0 &&
+                      order.products[0].productPrice}
+                  </td>
+                  <td className="p-5">${order?.orderTotal}</td>
+                </Link>
               </tr>
             ) : (
               <tr

@@ -88,8 +88,10 @@ const OrderDetails = ({ orderDetails }) => {
           </p>
         </div>
       </div>
+
       <div className="mt-1 p-4">
         {orderDetails.orderInfo?.order.products[0].name}
+
         {orderDetails.orderInfo?.order.products.map((product: any) => (
           <div>
             {" "}
@@ -102,7 +104,6 @@ const OrderDetails = ({ orderDetails }) => {
             </div>
           </div>
         ))}
-
         <div className="flex justify-between border border-textGray  p-4 rounded-md cursor-pointer mb-3 font-Nunito">
           <div>
             სულ საკომისიო: $

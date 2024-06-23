@@ -69,10 +69,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
 
   return (
     <div className="sticky top-0 h-screen w-1/12 lg:w-1/6 bg-white">
-      <div className="px-4 py-4 flex flex-col justify-between h-full">
+      <div className="px-2 sm:px-4 py-4 flex flex-col justify-between h-full">
         {/* Name */}
         <div className="mb-4">
-          <div className="bg-white p-4 rounded-lg">
+          <div className="hidden lg:block bg-white p-4 rounded-lg">
             <p className="text-lg hidden lg:block font-Nunito font-bold">
               {userData.instagram}
             </p>
@@ -95,10 +95,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
                           : "text-textGray cursor-pointer hover:text-textActive"
                       }`}
                     >
-                      <IconComponent
-                        size={24}
-                        className="fill-current text-textGray"
-                      />
+                      <IconComponent className="fill-current text-textGray min-h-[15px] min-w-[15px]" />
                       <span className="mt-1 hidden lg:block">{item.label}</span>
                     </a>
                   </div>

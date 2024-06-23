@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, Location } from "react-router-dom";
 import AllOrders from "../components/AllOrders";
 import OrderDetails from "../components/OrderDetails";
 import Sidebar from "../components/sidebar/Sidebar";
@@ -28,20 +29,39 @@ interface OrderDetailsState {
 }
 
 function Orders() {
+  const location = useLocation();
   const [orderDetails, setOrderDetails] = useState<OrderDetailsState>({
-    orderInfo: null,
+    orderInfo: location.state?.order || null,
   });
+
+  useEffect(() => {
+    if (location.state) {
+      const order = location.state.orderInfo;
+      setOrderDetails({ orderInfo: order });
+      console.log(order);
+    } else {
+      console.log("ar aris state");
+    }
+  }, [location.state]);
 
   function clickHandler(order: Order) {
     setOrderDetails({
       orderInfo: order,
     });
+
+    console.log(order);
   }
+
+  // function clickHandler(order: Order) {
+  //   setOrderDetails({
+  //     orderInfo: order,
+  //   });
+  // }
 
   return (
     <div className="flex flex-row bg-pageBG min-h-screen">
       <Sidebar activeTab="შეკვეთები" />
-      <div className="w-9/12 md:w-8/12 bg-pageBG ">
+      <div className="w-11/12 md:w-8/12 bg-pageBG ">
         <AllOrders clickHandler={clickHandler} />
       </div>
       <div className="hidden md:block md:w-6/12 bg-white ">
