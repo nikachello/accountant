@@ -21,7 +21,9 @@ const AllOrders: React.FC<AllOrdersProps> = ({
     }
   }, [activeOrderIdProp]);
 
-  const [activeOrderId, setActiveOrderId] = useState(undefined);
+  const [activeOrderId, setActiveOrderId] = useState<number | undefined>(
+    undefined
+  );
 
   return (
     <div className="p-8">
