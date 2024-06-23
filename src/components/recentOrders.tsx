@@ -11,59 +11,53 @@ const RecentOrders: React.FC<RecentOrdersProps> = ({ startDate, endDate }) => {
   return (
     <div className="">
       <h1 className="font-BPG-Glaho text-lg mb-5">ახალი შეკვეთები</h1>
-      <table className="text-center text-sm sm:text-lg sm:w-full">
-        <tr className="text-center font-BPG-Glaho border-b-2 pb-2">
-          <th>შეკვეთის ნომერი</th>
-          <th>მომხმარებელი</th>
-          <th>პროდუქცია</th>
-          <th>ფასი</th>
-          <th>მთლიანი შეკვეთა</th>
-        </tr>
-
+      <div className="w-full flex justify-between p-5">
+        <span className="w-1/4">შეკვეთა</span>
+        <span className="w-1/4">მომხმარებელი</span>
+        <span className="w-1/4">მოდელი</span>
+        <span className="w-1/4">თანხა</span>
+        <span className="w-1/4">სტატუსი</span>
+      </div>
+      <div className="">
         {getRecentOrders(storeDatabase.userID, 5, startDate, endDate).map(
-          (order) =>
-            typeof order !== "string" ? (
-              <tr
-                className="text-center font-Nunito hover:bg-pageBG cursor-pointer"
-                key={order?.orderID}
+          (order) => {
+            if (!order) return null;
+            return (
+              <Link
+                to="/orders"
+                state={{
+                  orderInfo: { order: order },
+                  activeOrderId: order.orderID,
+                }}
               >
-                <Link
-                  className="flex flex-row w-full h-full"
-                  to="/orders"
-                  state={{ orderInfo: { order: order } }}
+                <div
+                  key={order.orderID}
+                  className="text-sm flex justify-between items-center bg-pageBG p-5 rounded-md cursor-pointer mb-3 font-Nunito"
                 >
-                  <td className="p-5">{order?.orderID}</td>
-                  <td className="p-5">{order?.clientName}</td>
-                  <td className="p-5">
-                    {order?.products.length == 1 &&
-                      `${order.products[0].productName} - ${order.products[0].productBrand}`}
-                    {order &&
-                      order.products.length > 1 &&
-                      `${order?.products[0].productName} - ${
-                        order?.products[0].productBrand
-                      } + ${order.products.length - 1}`}
-                  </td>
-                  <td className="p-5">
-                    $
-                    {order &&
-                      order.products.length > 0 &&
-                      order.products[0].productPrice}
-                  </td>
-                  <td className="p-5">${order?.orderTotal}</td>
-                </Link>
-              </tr>
-            ) : (
-              <tr
-                className="text-center font-Nunito hover:bg-pageBG cursor-pointer"
-                key={order} // You might want to use a different key for error messages
-              >
-                <td className="p-5" colSpan={5}>
-                  {order} {/* Render the error message */}
-                </td>
-              </tr>
-            )
+                  <div className="w-1/4">{order.orderID}</div>
+                  <div className="w-1/4">{order.clientName}</div>
+                  {order.products.length > 1 ? (
+                    <div className="hidden lg:block w-1/4">
+                      {order.products[0].productName} +{" "}
+                      {order.products.length - 1}
+                    </div>
+                  ) : (
+                    <div className="hidden lg:block w-1/4">
+                      {order.products[0].productName}
+                    </div>
+                  )}
+                  <div className="w-1/4">${order.orderTotal}</div>
+                  <div className="w-1/4">
+                    <span className="p-2 bg-green-200 rounded-md">
+                      გადახდილია
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            );
+          }
         )}
-      </table>
+      </div>
     </div>
   );
 };

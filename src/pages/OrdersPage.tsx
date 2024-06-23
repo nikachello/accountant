@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, Location } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AllOrders from "../components/AllOrders";
 import OrderDetails from "../components/OrderDetails";
 import Sidebar from "../components/sidebar/Sidebar";
@@ -34,11 +34,12 @@ function Orders() {
     orderInfo: location.state?.order || null,
   });
 
+  const [activeOrderId, setActiveOrderId] = useState(undefined);
   useEffect(() => {
     if (location.state) {
       const order = location.state.orderInfo;
       setOrderDetails({ orderInfo: order });
-      console.log(order);
+      setActiveOrderId(location.state.activeOrderId);
     } else {
       console.log("ar aris state");
     }
@@ -62,7 +63,10 @@ function Orders() {
     <div className="flex flex-row bg-pageBG min-h-screen">
       <Sidebar activeTab="შეკვეთები" />
       <div className="w-11/12 md:w-8/12 bg-pageBG ">
-        <AllOrders clickHandler={clickHandler} />
+        <AllOrders
+          clickHandler={clickHandler}
+          activeOrderIdProp={activeOrderId}
+        />
       </div>
       <div className="hidden md:block md:w-6/12 bg-white ">
         <OrderDetails orderDetails={orderDetails} />
