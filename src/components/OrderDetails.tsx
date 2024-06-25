@@ -59,7 +59,10 @@ const OrderDetails = ({ orderDetails, toggleClickHandler }) => {
           <div className="cursor-pointer">
             <LuPencil />
           </div>
-          <div className="cursor-pointer" onClick={toggleClickHandler}>
+          <div
+            className="cursor-pointer md:hidden"
+            onClick={toggleClickHandler}
+          >
             <IoCloseSharp />
           </div>
         </div>

@@ -73,7 +73,7 @@ function Orders() {
       </div>
       <div
         className={`${
-          areDetailsVisible ? "w-11/12 md:w-8/12" : "hidden"
+          areDetailsVisible ? "w-11/12 md:w-8/12" : "hidden md:block md:w-6/12"
         }  bg-white`}
       >
         <OrderDetails
