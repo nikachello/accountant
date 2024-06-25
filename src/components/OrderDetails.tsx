@@ -1,5 +1,6 @@
 import { LuPencil } from "react-icons/lu";
 import { IoCalendarClearOutline } from "react-icons/io5";
+import { IoCloseSharp } from "react-icons/io5";
 import storeDatabase from "../data/MockData";
 import { getOrderExpense } from "../utils/dataUtils";
 
@@ -24,7 +25,7 @@ interface OrderDetails {
 }
 
 // @ts-ignore
-const OrderDetails = ({ orderDetails }) => {
+const OrderDetails = ({ orderDetails, toggleClickHandler }) => {
   const expense = getOrderExpense(
     storeDatabase.userID,
     orderDetails.orderInfo?.order.orderID
@@ -35,15 +36,32 @@ const OrderDetails = ({ orderDetails }) => {
       <div className="flex flex-row justify-between">
         <div className="md:flex md:flex-col lg:block">
           <span>შეკვეთა: {orderDetails?.orderInfo?.order.orderID}</span>
-          <span className="mb-2 mt-2 lg:mt-0 lg:mb-0 lg:ml-5 bg-orange-400 p-2 rounded-md text-white">
-            მზადდება გასაგზავნად
-          </span>
-          <span className="lg:ml-5 bg-green-700 p-2 rounded-md text-white">
-            თანხა გადახდილია
-          </span>
+          {orderDetails?.orderInfo?.order.isOrderShipped ? (
+            <span className="mb-2 mt-2 lg:mt-0 lg:mb-0 lg:ml-5 bg-green-700 p-2 rounded-md text-white">
+              გაგზავნილია
+            </span>
+          ) : (
+            <span className="mb-2 mt-2 lg:mt-0 lg:mb-0 lg:ml-5 bg-orange-400 p-2 rounded-md text-white">
+              მზადდება გასაგზავნად
+            </span>
+          )}
+          {orderDetails?.orderInfo?.order.isMoneyReceived ? (
+            <span className="lg:ml-5 bg-green-700 p-2 rounded-md text-white">
+              თანხა გადახდილია
+            </span>
+          ) : (
+            <span className="lg:ml-5 bg-orange-400 p-2 rounded-md text-white">
+              არ არის გადახდილი
+            </span>
+          )}
         </div>
-        <div className="cursor-pointer">
-          <LuPencil />
+        <div className="flex gap-3">
+          <div className="cursor-pointer">
+            <LuPencil />
+          </div>
+          <div className="cursor-pointer" onClick={toggleClickHandler}>
+            <IoCloseSharp />
+          </div>
         </div>
       </div>
       <div className="my-3 flex flex-row items-center">

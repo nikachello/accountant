@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import storeDatabase from "../data/MockData";
 import { getCustomerInfo, getRecentOrders } from "../utils/dataUtils";
+import { CgDetailsMore } from "react-icons/cg";
 
 interface AllOrdersProps {
   clickHandler: (order: any) => void;
   activeOrderIdProp: number | undefined;
+  toggleClickHandler: () => void;
 }
 
 const AllOrders: React.FC<AllOrdersProps> = ({
   clickHandler,
   activeOrderIdProp,
+  toggleClickHandler,
 }) => {
   const allOrders = getRecentOrders(storeDatabase.userID, null, null, null);
 
@@ -65,10 +68,20 @@ const AllOrders: React.FC<AllOrdersProps> = ({
                   {order.products[0].productName}
                 </div>
               )}
-
               <div>${order.orderTotal}</div>
               <div className="">
-                <span className="p-2 bg-green-200 rounded-md">გადახდილია</span>
+                {order.isOrderPaid ? (
+                  <span className="p-2 bg-green-200 rounded-md">
+                    გადახდილია
+                  </span>
+                ) : (
+                  <span className="p-2 bg-orange-400 rounded-md">
+                    გადასახდელია
+                  </span>
+                )}
+              </div>
+              <div className="block md:hidden" onClick={toggleClickHandler}>
+                <CgDetailsMore />
               </div>
             </div>
           );

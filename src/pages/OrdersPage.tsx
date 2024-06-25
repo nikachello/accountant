@@ -49,30 +49,42 @@ function Orders() {
     setOrderDetails({
       orderInfo: order,
     });
-
-    console.log(order);
   }
 
-  // function clickHandler(order: Order) {
-  //   setOrderDetails({
-  //     orderInfo: order,
-  //   });
-  // }
+  const toggleClickHandler = () => {
+    setAreDetailsVisible(!areDetailsVisible);
+  };
+
+  const [areDetailsVisible, setAreDetailsVisible] = useState(false);
 
   return (
     <div className="flex flex-row bg-pageBG min-h-screen">
       <Sidebar activeTab="შეკვეთები" />
-      <div className="w-11/12 md:w-8/12 bg-pageBG ">
+      <div
+        className={`${
+          areDetailsVisible ? "hidden" : "w-11/12 md:w-8/12"
+        } bg-pageBG`}
+      >
         <AllOrders
           clickHandler={clickHandler}
           activeOrderIdProp={activeOrderId}
+          toggleClickHandler={toggleClickHandler}
         />
       </div>
-      <div className="hidden md:block md:w-6/12 bg-white ">
-        <OrderDetails orderDetails={orderDetails} />
+      <div
+        className={`${
+          areDetailsVisible ? "w-11/12 md:w-8/12" : "hidden"
+        }  bg-white`}
+      >
+        <OrderDetails
+          orderDetails={orderDetails}
+          toggleClickHandler={toggleClickHandler}
+        />
       </div>
     </div>
   );
+
+  // md:block md:w-6/12
 }
 
 export default Orders;
