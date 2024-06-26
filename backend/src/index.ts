@@ -2,11 +2,13 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 
 import productsRouter from "./routes/productsRoutes";
 import clientRouter from "./routes/clientsRoutes";
 import sellerRouter from "./routes/sellerRoutes";
 import authRouter from "./routes/authRoutes";
+
 // Load environment variables from .env file
 dotenv.config();
 
@@ -14,6 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware to parse JSON requests
+app.use(cors());
 app.use(express.json());
 
 mongoose

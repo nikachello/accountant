@@ -5,12 +5,18 @@ import { CiSquareQuestion } from "react-icons/ci";
 import { LiaChartBarSolid } from "react-icons/lia";
 import { IoIosLogOut } from "react-icons/io";
 import { MdReceiptLong } from "react-icons/md";
+import { useAuth } from "../../context/AuthContext";
 
 interface SidebarProps {
   activeTab: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
+  const { logout } = useAuth();
+  const handleLogOut = () => {
+    logout();
+  };
+
   const menuItems = [
     {
       label: "მთავარი",
@@ -122,7 +128,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
                 </span>
               </div>
             </div>
-            <div className="cursor-pointer">
+            <div className="cursor-pointer" onClick={handleLogOut}>
               <IoIosLogOut />
             </div>
           </div>

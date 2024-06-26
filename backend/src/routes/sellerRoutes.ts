@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 
-import Seller from "../Models/Seller";
+import Seller from "../models/Seller";
 import catchAsync from "../utils";
 
 const router = express.Router();

@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
-import Seller from "../Models/Seller";
+import Seller from "../models/Seller";
 import catchAsync from "../utils";
 
 const router = express.Router();
@@ -73,7 +73,7 @@ router.post(
       httpOnly: true,
     });
 
-    res.json({ message: "წარმატებული შესვლა", seller });
+    res.json({ message: "წარმატებული შესვლა", seller, token });
   })
 );
 

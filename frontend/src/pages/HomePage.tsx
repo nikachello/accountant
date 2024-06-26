@@ -1,3 +1,4 @@
+import { useAuth } from "../context/AuthContext";
 import DashboardStatistics from "../components/DashboardStatisticsTop";
 import Sidebar from "../components/sidebar/Sidebar";
 import DatePickerCustom from "../components/DatePicker";
@@ -6,8 +7,10 @@ import OrdersChart from "../components/OrdersChart";
 import IncomeDoughtnut from "../components/IncomeDoughtnut";
 import RecentOrders from "../components/recentOrders";
 import TopSellingProducts from "../components/TopSellingProducts";
+import LoginForm from "../components/LoginForm";
 
 function Home() {
+  const { isLoggedIn } = useAuth();
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -37,6 +40,11 @@ function Home() {
 
   const start = startDate || undefined;
   const end = endDate || undefined;
+
+  if (!isLoggedIn) {
+    // Render something for when the user is not logged in
+    return <LoginForm />;
+  }
 
   return (
     <div className="flex flex-row bg-pageBG min-h-screen relative">
