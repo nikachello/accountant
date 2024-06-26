@@ -47,7 +47,7 @@ const AllOrders: React.FC<AllOrdersProps> = ({
             <div
               className={`text-sm flex justify-between bg-white p-5 rounded-md cursor-pointer mb-3 font-Nunito border ${
                 order.orderID === activeOrderId
-                  ? `border-gray-300`
+                  ? `md:border-gray-300`
                   : `border-transparent`
               } hover:border-gray-300`}
               onClick={() => {
