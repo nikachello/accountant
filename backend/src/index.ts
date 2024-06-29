@@ -19,7 +19,12 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware to parse JSON requests
 app.use(cookieParser()); // Add this line to parse cookies
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Replace with your frontend URL (including port)
+    credentials: true, // Allow cookies from the frontend
+  })
+);
 app.use(express.json());
 
 mongoose

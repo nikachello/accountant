@@ -13,19 +13,28 @@ router.post(
   verifyToken,
   catchAsync(async (req: Request, res: Response) => {
     const {
-      clientId,
-      products,
+      clientPhone,
+      // products,
       total,
       isShipped,
+      productName,
+      productBrand,
+      productPrice,
       weight,
       paymentType,
       isMoneyReceived,
-      totalCargo,
+      cargo,
     } = req.body;
 
-    const client = await Client.findById(clientId);
+    let client = await Client.findOne({ phone: clientPhone });
     if (!client) {
-      return res.status(404).json({ message: "Client not found" });
+      client = new Client({
+        phone: clientPhone,
+        name: req.body.clientName,
+        mail: req.body.clientMail,
+      });
+
+      await client.save();
     }
 
     const sellerId = req.body.userId;
@@ -37,15 +46,19 @@ router.post(
     }
 
     const newOrder = new Order({
-      clientId: client._id,
-      sellerId: seller._id,
-      products,
+      client: client._id,
+      seller: seller._id,
+      // products,
+      productName,
+      productBrand,
+      productPrice,
       total,
       isShipped,
       weight,
       paymentType,
       isMoneyReceived,
-      totalCargo,
+      cargo,
+      date: new Date().toISOString(),
     });
 
     const savedOrder = await newOrder.save();
@@ -57,14 +70,14 @@ router.get(
   "/",
   verifyToken,
   catchAsync(async (req: Request, res: Response) => {
-    const orders = await Order.find({ sellerId: req.body.userId })
+    const orders = await Order.find({ seller: req.body.userId })
       .populate("products")
       .populate({
-        path: "clientId",
+        path: "client",
         select: "name mail phone", // fields to include from Client model
       })
       .populate({
-        path: "sellerId",
+        path: "seller",
         select: "name comission", // fields to include from Seller model
       })
       .exec();

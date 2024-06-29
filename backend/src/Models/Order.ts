@@ -4,20 +4,20 @@ import { Seller } from "./Seller";
 import { Product } from "./Product";
 
 export interface Order extends Document {
-  clientId: mongoose.Types.ObjectId;
+  client: mongoose.Types.ObjectId;
   products: Array<mongoose.Types.ObjectId | Product>; // Array of product IDs or embedded products
-  sellerId: mongoose.Types.ObjectId;
+  seller: mongoose.Types.ObjectId;
   total: number;
-  date: Date;
   isShipped: boolean;
   weight: number;
   paymentType: string;
   isMoneyReceived: boolean;
-  totalCargo: number;
+  cargo: number;
+  date: Date;
 }
 
 const OrderSchema: Schema = new Schema({
-  clientId: {
+  client: {
     type: Schema.Types.ObjectId,
     ref: "Client",
     required: true,
@@ -29,7 +29,7 @@ const OrderSchema: Schema = new Schema({
       required: true,
     },
   ],
-  sellerId: {
+  seller: {
     type: Schema.Types.ObjectId,
     ref: "Seller",
     required: true,
@@ -54,9 +54,12 @@ const OrderSchema: Schema = new Schema({
     type: Boolean,
     required: true,
   },
-  totalCargo: {
+  cargo: {
     type: Number,
     required: true,
+  },
+  date: {
+    type: Date,
   },
 });
 
