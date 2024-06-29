@@ -4,9 +4,9 @@ import { Seller } from "./Seller";
 import { Product } from "./Product";
 
 export interface Order extends Document {
-  clientId: number;
-  products: Array<number | Product>;
-  sellerId: number | Seller;
+  clientId: mongoose.Types.ObjectId;
+  products: Array<mongoose.Types.ObjectId | Product>; // Array of product IDs or embedded products
+  sellerId: mongoose.Types.ObjectId;
   total: number;
   date: Date;
   isShipped: boolean;
@@ -18,25 +18,24 @@ export interface Order extends Document {
 
 const OrderSchema: Schema = new Schema({
   clientId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
+    ref: "Client",
     required: true,
   },
   products: [
     {
-      type: Schema.Types.Mixed,
+      type: Schema.Types.ObjectId,
+      ref: "Product",
       required: true,
     },
   ],
   sellerId: {
-    type: Schema.Types.Mixed,
+    type: Schema.Types.ObjectId,
+    ref: "Seller",
     required: true,
   },
   total: {
     type: Number,
-    required: true,
-  },
-  date: {
-    type: Date,
     required: true,
   },
   isShipped: {
