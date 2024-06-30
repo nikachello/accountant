@@ -12,6 +12,10 @@ const OrderDetails = ({ orderDetails, toggleClickHandler }) => {
     orderDetails.orderInfo?.order.orderID
   );
 
+  if (orderDetails?.orderInfo === null) {
+    return <div className="font-BPG-Glaho p-6">აირჩიეთ შეკვეთა</div>;
+  }
+
   return (
     <div className="p-4 font-BPG-Glaho">
       <div className="flex flex-row justify-between">

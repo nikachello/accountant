@@ -9,8 +9,16 @@ const router = express.Router();
 router.get(
   "/",
   catchAsync(async (req: Request, res: Response) => {
-    const products = await Product.find();
-    res.json(products);
+    const { name } = req.query;
+    if (name) {
+      const product = await Product.find({
+        name: { $regex: name, $options: "i" },
+      });
+      res.json(product);
+    } else {
+      const products = await Product.find();
+      res.json(products);
+    }
   })
 );
 

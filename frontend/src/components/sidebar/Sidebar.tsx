@@ -34,9 +34,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab }) => {
       href: "/orders",
     },
     {
-      label: "მოთხოვნები",
+      label: "პროდუქტები",
       icon: CiSquareQuestion,
-      href: "#",
+      href: "/products",
     },
     {
       label: "სტატისტიკა",

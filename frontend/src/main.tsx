@@ -6,6 +6,7 @@ import "./index.css";
 
 import HomePage from "./pages/HomePage";
 import OrdersPage from "./pages/OrdersPage";
+import ProductsPage from "./pages/ProductPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -19,6 +20,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             element={
               <ProtectedRoute>
                 <OrdersPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <ProductsPage />
               </ProtectedRoute>
             }
           />

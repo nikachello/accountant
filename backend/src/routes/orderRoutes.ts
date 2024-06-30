@@ -5,6 +5,7 @@ import catchAsync from "../utils";
 import verifyToken from "../middlewares/verifyToken";
 import Seller from "../models/Seller";
 import Client from "../models/Client";
+import Product from "../models/Product";
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.post(
   catchAsync(async (req: Request, res: Response) => {
     const {
       clientPhone,
-      // products,
+      products,
       total,
       isShipped,
       productName,
@@ -45,10 +46,33 @@ router.post(
       return res.status(404).json({ message: "Seller not found" });
     }
 
+    if (!products) {
+      return res.status(404).json({ message: "დაამატეთ პროდუქტი" });
+    }
+
+    const fetchedProducts = await Product.find({
+      name: { $in: products },
+    });
+
+    if (fetchedProducts.length !== products.length) {
+      const fetchedProductNames = fetchedProducts.map(
+        (product: any) => product.name
+      );
+      const missingProducts = products.filter(
+        (productName: string) => !fetchedProductNames.includes(productName)
+      );
+
+      return res
+        .status(404)
+        .json({ message: "პროდუქტები არ არსებობს", missingProducts });
+    }
+
+    const productIds = fetchedProducts.map((product) => product._id);
+
     const newOrder = new Order({
       client: client._id,
       seller: seller._id,
-      // products,
+      products: productIds,
       productName,
       productBrand,
       productPrice,
