@@ -8,8 +8,19 @@ const router = express.Router();
 router.get(
   "/",
   catchAsync(async (req: Request, res: Response) => {
-    const clients = await Client.find();
-    res.json(clients);
+    const { mail } = req.query;
+
+    if (mail) {
+      // tu gvakvs mail
+      const clients = await Client.find({
+        mail: { $regex: mail, $options: "i" },
+      });
+      res.json(clients);
+    } else {
+      // tu ar gvakvs mail davabrunot kvela client
+      const clients = await Client.find();
+      res.json(clients);
+    }
   })
 );
 

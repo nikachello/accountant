@@ -17,24 +17,26 @@ const OrderDetails = ({ orderDetails, toggleClickHandler }) => {
       <div className="flex flex-row justify-between">
         <div className="md:flex md:flex-col lg:block">
           <span>შეკვეთა: {orderDetails?.orderInfo?.order._id}</span>
-          {orderDetails?.orderInfo?.order.isShipped ? (
-            <span className="mb-2 mt-2 lg:mt-0 lg:mb-0 lg:ml-5 bg-green-700 p-2 rounded-md text-white">
-              გაგზავნილია
-            </span>
-          ) : (
-            <span className="mb-2 mt-2 lg:mt-0 lg:mb-0 lg:ml-5 bg-orange-400 p-2 rounded-md text-white">
-              მზადდება გასაგზავნად
-            </span>
-          )}
-          {orderDetails?.orderInfo?.order.isMoneyReceived ? (
-            <span className="lg:ml-5 bg-green-700 p-2 rounded-md text-white">
-              თანხა გადახდილია
-            </span>
-          ) : (
-            <span className="lg:ml-5 bg-orange-400 p-2 rounded-md text-white">
-              არ არის გადახდილი
-            </span>
-          )}
+          <div className="flex flex-col gap-2">
+            {orderDetails?.orderInfo?.order.isShipped ? (
+              <span className="mb-2 mt-2 lg:mt-0 lg:mb-0 lg:ml-5 bg-green-700 p-2 rounded-md text-white">
+                გაგზავნილია
+              </span>
+            ) : (
+              <span className="mb-2 mt-2 lg:mt-0 lg:mb-0 lg:ml-5 bg-orange-400 p-2 rounded-md text-white">
+                მზადდება გასაგზავნად
+              </span>
+            )}
+            {orderDetails?.orderInfo?.order.isMoneyReceived ? (
+              <span className="lg:ml-5 bg-green-700 p-2 rounded-md text-white">
+                თანხა გადახდილია
+              </span>
+            ) : (
+              <span className="lg:ml-5 bg-orange-400 p-2 rounded-md text-white">
+                არ არის გადახდილი
+              </span>
+            )}
+          </div>
         </div>
         <div className="flex gap-3">
           <div className="cursor-pointer">
@@ -53,7 +55,7 @@ const OrderDetails = ({ orderDetails, toggleClickHandler }) => {
           <IoCalendarClearOutline />
         </div>
         <div className="mt-1 ml-2">
-          <span>2024-03-23</span>
+          <span>{orderDetails.orderInfo?.order.date}</span>
         </div>
       </div>
       <div className="ml-1">
@@ -77,7 +79,7 @@ const OrderDetails = ({ orderDetails, toggleClickHandler }) => {
           <p className="font-Nunito text-[20px] font-bold">შეკვეთა</p>
           <p className="font-Nunito text-[15px]  color-textGray">
             წონა: {orderDetails.orderInfo?.order.weight}კგ -{" "}
-            {orderDetails.orderInfo?.order.totalCargo}$
+            {orderDetails.orderInfo?.order.cargo}$
           </p>
           <p className="font-Nunito text-[15px] color-textGray">
             გადახდის მეთოდი: {orderDetails.orderInfo?.order.paymentType}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 interface OrderAddFormProps {
@@ -22,6 +22,11 @@ const OrderAddForm: React.FC<OrderAddFormProps> = ({
     isMoneyReceived: false,
     cargo: 0,
   });
+
+  const [customers, setCustomers] = useState([]);
+  const [customerList, showCustomerList] = useState(false);
+  const [showAllCustomerInputs, setShowAllCustomerInputs] = useState(false);
+  const [inputsDisabled, setInputsDisabled] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -51,6 +56,42 @@ const OrderAddForm: React.FC<OrderAddFormProps> = ({
     }
   };
 
+  const handleExistingCustomer = (customer) => {
+    setFormData({
+      ...formData,
+      clientMail: customer.mail,
+      clientName: customer.name,
+      clientPhone: customer.phone,
+    });
+
+    setInputsDisabled(true);
+  };
+
+  useEffect(() => {
+    if (formData.clientMail.length === 0) {
+      showCustomerList(false);
+      setCustomers([]);
+      return;
+    }
+    const fetchCustomers = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/clients?mail=${formData.clientMail}`,
+          {
+            withCredentials: true,
+          }
+        );
+        setCustomers(response.data);
+        showCustomerList(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchCustomers();
+    console.log(customers);
+  }, [formData.clientMail]);
+
   return (
     <div className="flex items-center justify-center h-full w-full font-BPG-Glaho">
       <div className="bg-white px-10 pt-2 pb-12 shadow-md flex flex-col text-center w-1/2">
@@ -59,19 +100,6 @@ const OrderAddForm: React.FC<OrderAddFormProps> = ({
         </div>
         <div>
           <form className="w-full mt-2" onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                მომხმარებლის სახელი
-              </label>
-              <input
-                type="text"
-                name="clientName"
-                value={formData.clientName}
-                onChange={handleChange}
-                placeholder="John Doe"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 მომხმარებლის მეილი
@@ -83,6 +111,39 @@ const OrderAddForm: React.FC<OrderAddFormProps> = ({
                 onChange={handleChange}
                 placeholder="John@gmail.com"
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                disabled={inputsDisabled}
+              />
+            </div>
+            <div className="-mt-4">
+              {/* Conditional rendering of customer list */}
+              {customerList &&
+                formData.clientMail.length > 0 &&
+                inputsDisabled === false && (
+                  <div className="-mt-4">
+                    {customers.map((customer) => (
+                      <div
+                        onClick={() => handleExistingCustomer(customer)}
+                        key={customer._id}
+                        className="bg-gray-300 p-3 hover:bg-white cursor-pointer"
+                      >
+                        {customer.name} {/* Display the customer's name */}
+                      </div>
+                    ))}
+                  </div>
+                )}
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                მომხმარებლის სახელი
+              </label>
+              <input
+                type="text"
+                name="clientName"
+                value={formData.clientName}
+                onChange={handleChange}
+                placeholder="John Doe"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                disabled={inputsDisabled}
               />
             </div>
             <div className="mb-4">
@@ -96,6 +157,7 @@ const OrderAddForm: React.FC<OrderAddFormProps> = ({
                 onChange={handleChange}
                 placeholder="+15836548987"
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                disabled={inputsDisabled}
               />
             </div>
             <div className="mb-4">

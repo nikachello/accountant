@@ -80,6 +80,7 @@ router.get(
         path: "seller",
         select: "name comission", // fields to include from Seller model
       })
+      .sort({ date: -1 })
       .exec();
     res.status(200).json(orders);
   })
